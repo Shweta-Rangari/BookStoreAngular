@@ -1,7 +1,7 @@
 
 
 app.controller('bookController', 
-        function ($scope, dataFactory) {
+        function ($scope, dataFactory,$location,$window) {
 
     $scope.status;
     $scope.customers;
@@ -35,6 +35,7 @@ app.controller('bookController',
          dataFactory.updateBook(book)
           .then(function (response) {
               $scope.status = 'Updated Customer! Refreshing customer list.';
+              $window.location.reload();
           }, function (error) {
               $scope.status = 'Unable to update customer: ' + error.message;
           });
@@ -57,6 +58,9 @@ app.controller('bookController',
     };
 
     $scope.deleteBook = function (id) {
+    	
+   	 if (confirm("Are you sure that you want delete the book?"))
+         {
         dataFactory.deleteBook(id)
         .then(function (response) {
             $scope.status = 'Deleted Customer! Refreshing customer list.';
@@ -71,7 +75,7 @@ app.controller('bookController',
         }, function (error) {
             $scope.status = 'Unable to delete customer: ' + error.message;
         });
-    };
+    }};
 
     $scope.getCustomerOrders = function (id) {
         dataFactory.getOrders(id)
