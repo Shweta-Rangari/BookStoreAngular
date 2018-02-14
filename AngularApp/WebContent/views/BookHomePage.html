@@ -1,0 +1,138 @@
+<div class="container">
+	<div class="smart-table-container">
+		<h2>Books Details</h2>
+		<table st-table="displayedRow" st-safe-src="books"
+			class="table table-striped">
+			<thead>
+				<tr>
+					<th>Book Name</th>
+					<th>Author</th>
+					<th>Image</th>
+					<th>Book Code</th>
+					<th>Price</th>
+					<th>Published On</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="book in displayedRow" st-select-row="book">
+					<td>{{book.name}}</td>
+					<td>{{book.authors}}</td>
+					<td><img ng-src="data:image/JPEG;base64,{{book.bimage}}">
+					</td>
+					<td>{{book.code}}</td>
+					<td>{{book.price}}</td>
+					<td>{{book.publishedOn| date:'medium'}}</td>
+					<td>
+						<button type="button" ng-click="deleteBook(book.id)"
+							class="btn btn-sm btn-danger">
+							<i class="glyphicon glyphicon-trash"></i>
+						</button>
+					</td>
+					<td>
+						<button type="button" ng-click="setBook(book)" data-toggle="modal"
+							data-target="#myModal">
+							<i class="glyphicon glyphicon-pencil"> </i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="7" class="text-center">
+						<div st-pagination="" st-items-by-page="5" st-displayed-pages="3"></div>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+
+
+
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Edit Book Details</h4>
+				</div>
+				<div class="modal-body">
+
+					<form novalidate="novalidate" class="form-horizontal">
+						<div class="control-group">
+							<label class="control-label" for="inputFirstName">Book
+								Name:</label>
+
+							<div class="controls">
+								<input type="text" id="inputFirstName" ng-model="book.name"
+									placeholder="First name" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="inputLastName">Author
+								Name:</label>
+
+							<div class="controls">
+								<input type="text" id="inputLastName" ng-model="book.authors"
+									placeholder="Last name" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="inputLastName">Book
+								Code:</label>
+
+							<div class="controls">
+								<input type="text" id="inputLastName" ng-model="book.code"
+									placeholder="Last name" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="inputLastName">Price:</label>
+
+							<div class="controls">
+								<input type="text" id="inputLastName" ng-model="book.price"
+									placeholder="Last name" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="inputLastName">Published
+								On:</label>
+
+							<div class="control-group">
+								<md-datepicker ng-model="book.publishedOn" md-placeholder="Enter date"></md-datepicker>
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label" for="inputLastName">Image:</label>
+
+							<div class="controls">
+								<img type="file" ng-src="data:image/JPEG;base64,{{book.bimage}}">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="inputLastName">Change Image:</label> 
+							<input type="file" file-model="book.image" />
+						</div>
+						
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="button" ng-click="updateBook(book)" class="btn btn-default">Save</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+</div>
+
+
+
+
+
